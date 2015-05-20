@@ -13,6 +13,10 @@ var maxwidth = Ti.Platform.displayCaps.platformWidth;
 var maxheight = Ti.Platform.displayCaps.platformHeight;
 var HIERARCHY_MODEL = require("models/ca-objects-hierarchy")();
 
+//TESTFAIRY
+/*var TiTestFairy = require("com.arihiro.titestfairy");
+TiTestFairy.begin("b911dae286a68622d9e1cb8fb15ee847b85d27fc");*/
+
 var 	myModal = Ti.UI.createWindow({
 	    title           : 'My Modal',
 	    backgroundColor : 'transparent'

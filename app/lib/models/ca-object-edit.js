@@ -356,7 +356,7 @@ function Model() {
 
 	}
 
-	//apparement, fait tout crasher
+
 	
 	this.cleanTempInsertTable = function (_id, _attribute){
 		APP.log("debug", "cleanTempInsertTable");
@@ -373,6 +373,7 @@ function Model() {
 	}
 
 	/*
+	//apparement, fait tout crasher... :/
 	this.cleanTempInsertTable = function (){
 		//cleans the _edit_temp_insert table
 		var db = Ti.Database.open(DBNAME);
