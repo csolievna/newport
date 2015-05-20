@@ -28,13 +28,13 @@ function Model() {
 		//cleans the db: delete all tables
 		// you don't have to do that
 		//if you dont change their structures
-		var request = "DROP TABLE IF EXISTS " + _ca_table + "_edit_base ;";
+		/*var request = "DROP TABLE IF EXISTS " + _ca_table + "_edit_base ;";
 		db.execute(request);
 		var request = "DROP TABLE IF EXISTS " + _ca_table + "_edit_updates ;";
 		db.execute(request);
 		var request = "DROP TABLE IF EXISTS " + _ca_table + "_edit_temp_insert ;";
 		db.execute(request);
-		
+		*/
 
 		var request = "CREATE TABLE IF NOT EXISTS " + _ca_table + "_edit_base (id INTEGER PRIMARY KEY AUTOINCREMENT, object_id TEXT, json TEXT);";
 		db.execute(request);
@@ -212,7 +212,8 @@ function Model() {
 		db.close();
 		APP.log("debug", "insertTempAddition OK");
 		APP.log("debug", APP.CURRENT_ID);
-		
+		APP.log("debug", attribute);
+		APP.log("debug", json);
 	}
 
 	//returns an array of objects, containing the name of the modified attribute and the json created in insertTempAddition
@@ -265,8 +266,9 @@ function Model() {
 	}
 
 	this.saveChanges = function() {
-		APP.log("debug", "SAVE-CHANGES");
+		APP.log("debug", " DEBUG SAVE-CHANGES");
 		var attribut, valeur, result, is_modified, is_new, bundle_code;
+		APP.log("debug", APP.CURRENT_ID);
 		var db = Ti.Database.open(DBNAME);
 		db.execute("BEGIN TRANSACTION;");
 		
@@ -278,11 +280,13 @@ function Model() {
 			while (data.isValidRow()) {
 				//get attribute OKDONE
 				attribut = data.fieldByName("attribute");
+				APP.log("debug", attribut);
 				//get value: OKDONE
 				//1)get json & parse it into an object
 				var otmp = JSON.parse(data.fieldByName("json"));
 				//2)get value, isnew and ismodified
 				valeur= otmp[0][attribut]; 	
+				APP.log("debug", valeur);
 				is_modified = otmp[0].is_modified;
 				is_new = otmp[0].is_new; 
 				bundle_code = otmp[0].bundle;
@@ -306,7 +310,7 @@ function Model() {
 		}
 		db.close();
 
-
+		APP.log("debug", result);
 		return result; 
 	}
 
